@@ -58,7 +58,7 @@ if not exist "%DataFolder%" (
     if not exist "%Target%" (
         mkdir "%Target%"
     )
-    set /p chk="Ready to start copying files, proceed? Y/N "
+    set /p chk="Ready to start copying files, proceed? (this might take a while) Y/N "
     if /i "%chk%"=="Y" (
         echo.
     ) else (
@@ -68,6 +68,7 @@ if not exist "%DataFolder%" (
     echo
     robocopy "%DataFolder%" "%Target%" /E /MOVE >nul 2>&1
     mklink /D "%DataFolder%" "%Target%" 2>nul
+    echo.
     echo and also copied all of the files from "%DataFolder%" to Target too!
 )
 
