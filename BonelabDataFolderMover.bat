@@ -46,11 +46,14 @@ if not exist "%DataFolder%" (
     set /p chk="want to create symlink at the path "%DataFolder%" anyway? Y/N "
     if /i "%chk%"=="Y" (
         echo doing it
+        if not exist "%Target%" (
+            mkdir "%Target%"
+        )
+        mklink /D "%DataFolder%" "%Target%" 2>nul
     ) else (
         echo aborting
         goto end
     )
-    mklink /D "%DataFolder%" "%Target%" 2>nul
 ) else (
     if not exist "%Target%" (
         mkdir "%Target%"
@@ -64,8 +67,7 @@ if not exist "%DataFolder%" (
     )
     echo
     robocopy "%DataFolder%" "%Target%" /E /MOVE >nul 2>&1
-    mklink /D "%DataFolder%" "%Target%" >nul 2>&1
-    echo there you go, created symlionk "%DataFolder%" ^<^<==^>^> "%Target%"
+    mklink /D "%DataFolder%" "%Target%" 2>nul
     echo and also copied all of the files from "%DataFolder%" to Target too!
 )
 
