@@ -31,7 +31,7 @@ if /i "%chk%"=="Y" (
 
 :main
 dir /al /b %USERPROFILE%\AppData\LocalLow 2>nul| findstr /x "Stress Level Zero" 2>nul
-if %errorlevel%==0 (
+if not %errorlevel%==0 (
     echo.
     echo you already have symlink by path "%DataFolder%" wtf bro :[
     echo.
